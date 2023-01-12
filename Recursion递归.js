@@ -47,7 +47,7 @@ const data = [
 let result = {};
 // 输入id号 返回data中的数据对象
 function findObj(data, id) {
-  data.forEach(function (element) {
+  data.forEach((element) => {
     if (element.id == id) {
       result = element;
     } else if (element.goods && element.goods.length > 0) {
