@@ -56,15 +56,15 @@ var carFleet = function (target, position, speed) {
         if (sortP[index][1] <= sortP[j][1]) {
           continue;
         } else {
-          if (getTime(index) <= getTime(j)) {
+          if (
+            (target - sortP[index][0]) / sortP[index][1] <=
+            (target - sortP[j][0]) / sortP[j][1]
+          ) {
             meet++;
             break;
           }
         }
       }
-    }
-    function getTime(i) {
-      return (target - sortP[i][0]) / sortP[i][1];
     }
   }
   return teamNum - meet;
