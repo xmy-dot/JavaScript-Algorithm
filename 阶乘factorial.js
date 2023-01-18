@@ -13,6 +13,6 @@ function randomNum() {
       return factorial(ranNum - 1) * ranNum;
     }
   }
-  const result = factorial(ranNum);
+  // const result = factorial(ranNum);
   // console.log("ranNum", ranNum);
   // console.log("result", result);

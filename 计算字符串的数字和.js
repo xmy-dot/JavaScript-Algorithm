@@ -38,27 +38,26 @@
 // 2 <= k <= 100
 // s 仅由数字（0 - 9）组成。
 
-var digitSum = function (s, k) {
+var digitSum = function(s, k) {
   let res = [];
-  if (s.length > k) {
-    let quotient = Math.ceil(s.length / k);  
-    for (let index = 0; index < quotient; index++) {
-      res.push(s.substring(index * k, (index + 1) * k));
-      //将s中的数字每k个分成一个字符串
-    }
-  } else{
-    return s
+  if (s.length <= k) {
+    return s;
+  }
+  let quotient = Math.ceil(s.length / k);
+  for (let index = 0; index < quotient; index++) {
+    res.push(s.substring(index * k, (index + 1) * k));
+    //将s中的数字每k个分成一个字符串
   }
   res.forEach((ele, index, arr) => {
-    arr[index] = ([...ele].map(Number)).reduce((acr, cur) => {
-        return acr + cur;
-      }, 0);;
+    arr[index] = [...ele].map(Number).reduce((acr, cur) => {
+      return acr + cur;
+    }, 0);
   });
   //将res中的每一位字符串转为数组 再用reduce求和
   res = res.toString().replaceAll(",", "");
   //求和后将每一位的数字转为字符串再去掉,和空格
   if (res.length > k) {
-    res = digitSum(res, k)
+    res = digitSum(res, k);
   }
-  return res
+  return res;
 };
