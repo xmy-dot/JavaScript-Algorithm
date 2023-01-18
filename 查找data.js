@@ -42,5 +42,3 @@ function findObj(data, id) {
   return result;
 }
 
-const res = findObj(data, 1);
-// console.log(res);
