@@ -1,3 +1,5 @@
+// leetCode 2054
+
 // 给你一个下标从 0 开始的二维整数数组 events
 //其中 events[i] = [startTimei, endTimei, valuei]
 //第 i 个活动开始于 startTimei ，结束于 endTimei
@@ -16,34 +18,21 @@
 // 1 <= startTimei <= endTimei <= 10^9
 // 1 <= valuei <= 10^6
 
-var maxTwoEvents = function (events) {
+var maxTwoEvents = function(events) {
+  const eventsLen = events.length;
   events.sort((a, b) => {
     return a[0] - b[0];
   });
-  let result = 0;
-  const eventsLen = events.length;
-  let value = [];
-  for (let i = 0; i < eventsLen; i++) {
-    for (let j = i + 1; j < eventsLen; j++) {
-      let key = true;
-      if (
-        (events[j][0] >= events[i][0] && events[j][0] <= events[i][1]) ||
-        (events[j][1] <= events[i][1] && events[j][1] >= events[i][0])
-      ) {
-        key = false;
-      }
-      if (key) {
-        value.push(events[i][2] + events[j][2]);
+  let value = Array(eventsLen).fill(0);
+  for (let index = 0; index < eventsLen; index++) {
+    value[index] = events[index][2];
+    for (let j = index + 1; j < eventsLen; j++) {
+      if (events[index][1] < events[j][0]) {
+        value[index] = Math.max(events[index][2] + events[j][2], value[index]);
       }
     }
-    value.push(events[i][2]);
   }
-  const valueLen = value.length;
-  for (let index = 0; index < valueLen; index++) {
-    result = value[index] > result ? value[index] : result;
-  }
-  return result;
+  return Math.max(...value);
 };
-
 
 // 超时了T^T
