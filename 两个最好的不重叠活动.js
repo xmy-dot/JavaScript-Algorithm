@@ -18,16 +18,13 @@
 // 1 <= startTimei <= endTimei <= 10^9
 // 1 <= valuei <= 10^6
 
-var maxTwoEvents = function(events) {
+var maxTwoEvents = function (events) {
   const eventsLen = events.length;
-  events.sort((a, b) => {
-    return a[0] - b[0];
-  });
   let value = Array(eventsLen).fill(0);
   for (let index = 0; index < eventsLen; index++) {
     value[index] = events[index][2];
     for (let j = index + 1; j < eventsLen; j++) {
-      if (events[index][1] < events[j][0]) {
+      if (events[index][1] < events[j][0] || events[index][0] > events[j][1]) {
         value[index] = Math.max(events[index][2] + events[j][2], value[index]);
       }
     }
